@@ -1,0 +1,36 @@
+@import '../../styles/app';
+
+.root {
+  min-height: 64px;
+  background-color: $brand-primary;
+  color: $body-bg;
+  z-index: $zindex-navbar;
+
+  a,
+  a:focus {
+    color: $body-bg;
+  }
+
+  &.fixed {
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  }
+
+  .container {
+    display: flex;
+    align-items: center;
+  }
+
+  .logo {
+    font-weight: 400;
+    text-transform: uppercase;
+  }
+
+  .navbarRight {
+    margin-left: auto;
+    margin-right: $grid-gutter-width/2;
+
+    > a {
+      margin-left: 1.125em;
+    }
+  }
+}

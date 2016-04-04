@@ -1,0 +1,25 @@
+@import "../../styles/app";
+
+/*
+ * Base styles
+ * --------------------------------------------------------------------------- */
+
+body {
+  background-color: $body-bg;
+  color: $text-color;
+  font-family: $font-family-sans-serif;
+  font-size: $font-size-base;
+  font-family: $font-family-sans-serif;
+  font-size: $font-size-base;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.content {
+  flex: 1;
+}
+

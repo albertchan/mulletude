@@ -1,0 +1,23 @@
+@import '../../styles/app';
+
+.root {
+  min-height: 500px;
+  padding-top: 2em;
+  padding-bottom: 2em;
+  background-color: $brand-primary;
+  color: $body-bg;
+
+  .lead {
+    font-size: 2em;
+    font-weight: 100;
+
+    strong {
+      font-weight: 400;
+      text-transform: uppercase;
+    }
+  }
+
+  .red {
+    color: #F44336;
+  }
+}
