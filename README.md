@@ -70,6 +70,6 @@ npm run build
 
 #### Todos
 
-[ ] Testing
-[ ] Provide example Redux actions
-[ ] Internationalization (i18n)
+* [ ] Testing
+* [ ] Provide example Redux actions
+* [ ] Internationalization (i18n)
