@@ -7,7 +7,7 @@ import Hapi from 'hapi';
 import Inert from 'inert';
 import Vision from 'vision';
 import config from './config';
-import handleRender from './handlers/render';
+import handleRender from './helpers/render';
 
 // Check environment for production
 const environment = process.env.NODE_ENV || 'development';

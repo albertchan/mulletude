@@ -4,6 +4,7 @@ import webpackMiddleware from 'webpack-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 import webpackConfig from './webpack.config';
 import clean from './clean';
+import copy from './copy';
 import run from './run';
 import runServer from './runServer';
 
@@ -13,6 +14,7 @@ import runServer from './runServer';
  */
 async function start() {
     await run(clean);
+    await run(copy);
     await new Promise(resolve => {
         // Patch the client-side bundle configurations
         // to enable Hot Module Replacement (HMR)
@@ -61,11 +63,7 @@ async function start() {
         };
 
         // Wait for server bundles to finish before serving
-        if (webpackConfig[1].plugins.length > 0) {
-            bundler.plugin('done', () => handleServerBundleComplete());
-        } else {
-            handleServerBundleComplete()
-        }
+        bundler.plugin('done', () => handleServerBundleComplete());
     });
 }
 

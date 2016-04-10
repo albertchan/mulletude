@@ -14,12 +14,14 @@ Prior art and inspirations include the following:
 Mulletude, as the name implies, has attitude and is very opinionated. The opinion is that a boilerplate should only include the essentials for you to start rocking, just like old-time hockey. Decisions such as what database or API framework to use, or whether to wear a helmet or not, is entirely up to you.
 
 * [Hapi](http://hapijs.com/) server framework for Node.js
-* [React.js](http://facebook.github.io/react/) for view system
-* [React-router](https://github.com/reactjs/react-router) to keep UI in sync with the URL
+* [React](http://facebook.github.io/react/) for view system
+* [react-router](https://github.com/reactjs/react-router) to keep UI in sync with the URL
 * [Redux](https://github.com/reactjs/redux) for predictable state container
-* [i18next](https://github.com/kenkouot/hapi-i18next) for internationalization
+* [i18next](https://github.com/i18next/i18next) for internationalization
+* [react-helmet](https://github.com/nfl/react-helmet) to manage title and meta tag information
 * [Webpack](http://webpack.github.io/)
-* Linting with eslint
+* [mocha](https://mochajs.org/) for unit testing
+* [ESLint](http://eslint.org/) to maintain a consistent coding style
 * ES6 and ES7 ready with Babel
 
 #### Project structure
@@ -32,7 +34,8 @@ Mulletude, as the name implies, has attitude and is very opinionated. The opinio
 │   ├── actions/            # Action creators to trigger a dispatch to stores
 │   ├── components/         # React components
 │   ├── containers/         # Higher-order React components
-│   ├── handlers/           # Render handlers
+│   ├── helpers/            # Helpers and handlers
+│   ├── locales/            # Translation files
 │   ├── reducers/           # Redux reducers
 │   ├── routes/             # Page components along with routing information
 │   ├── store/              # Application state and logic

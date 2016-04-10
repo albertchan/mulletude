@@ -116,6 +116,8 @@ const clientConfig = extend(true, {}, config, {
     },
 
     plugins: [
+        // Emit a file with assets paths
+        // https://github.com/sporto/assets-webpack-plugin#options
         new AssetsPlugin({
             path: path.resolve(__dirname, '../build'),
             filename: 'assets.js',
