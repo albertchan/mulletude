@@ -93,7 +93,6 @@ async function start() {
 
         // Wait for server bundles to finish before serving
         bundler.plugin('done', () => {
-            console.log('bundler done');
             handleServerBundleComplete()
         });
     });
