@@ -1,4 +1,4 @@
-/* Colors */
+// Colors
 
 $gray-base:                 #000 !default;
 $gray-darker:               lighten($gray-base, 13.5%) !default; // #222
@@ -14,7 +14,7 @@ $brand-warning:             #f0ad4e !default;
 $brand-danger:              #d9534f !default;
 
 
-/* Scaffolding */
+// Scaffolding
 
 $body-bg:                   #fff !default;
 $text-color:                $gray-dark !default;
@@ -22,7 +22,7 @@ $link-color:                $brand-primary !default;
 $link-hover-color:          darken($link-color, 15%) !default;
 
 
-/* Typography */
+// Typography
 
 $font-family-sans-serif:    'Roboto', 'Helvetica Neue', sans-serif;
 $font-size-base:            16px;
@@ -32,7 +32,7 @@ $headings-font-family:      inherit !default;
 $headings-font-weight:      500 !default;
 
 
-/* Media queries */
+// Media queries
 
 $screen-xs-min:             480px !default;
 $screen-sm-min:             768px !default;
@@ -44,7 +44,7 @@ $screen-sm-max:             ($screen-md-min - 1) !default;
 $screen-md-max:             ($screen-lg-min - 1) !default;
 
 
-/* Grid system */
+// Grid system
 
 $grid-columns:              12 !default;
 $grid-gutter-width:         32px !default;
@@ -52,14 +52,14 @@ $grid-float-breakpoint:     $screen-sm-min !default;
 $grid-float-breakpoint-max: ($grid-float-breakpoint - 1) !default;
 
 
-/* Container sizes */
+// Container sizes
 
 $container-sm:              (720px + $grid-gutter-width) !default;
 $container-md:              (940px + $grid-gutter-width) !default;
 $container-lg:              (1140px + $grid-gutter-width) !default;
 
 
-/* Z-indices */
+// Z-indices
 
 $zindex-navbar:             1000 !default;
 $zindex-dropdown:           1000 !default;
@@ -70,6 +70,6 @@ $zindex-modal-background:   1040 !default;
 $zindex-modal:              1050 !default;
 
 
-/* Components */
+// Components
 $section-padding-top:       1em;
 $section-padding-bottom:    1em;
