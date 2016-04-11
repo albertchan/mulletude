@@ -3,11 +3,17 @@
     "name": "Mulletude",
     "tagline": "Snappy up front, snazzy in the back."
   },
+
   "language": [
     {"id": "us-EN", "name": "English"},
     {"id": "zh-HK", "name": "繁體"}
   ],
+
   "nav": {
     "about": "關於"
+  },
+
+  "footer": {
+    "copyright": "Copyright © 2016 Albert Chan"
   }
 }
