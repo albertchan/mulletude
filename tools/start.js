@@ -8,6 +8,8 @@ import copy from './copy';
 import run from './run';
 import runServer from './runServer';
 
+const DEBUG = !process.argv.includes('--release');
+
 /**
  * Launches a development web server with "live reload" functionality -
  * synchronizing URLs, interactions and code changes across multiple devices.
@@ -26,6 +28,29 @@ async function start() {
             }
             config.plugins.push(new webpack.HotModuleReplacementPlugin());
             config.plugins.push(new webpack.NoErrorsPlugin());
+            config.module.loaders
+                .filter(x => x.loader === 'babel-loader')
+                .forEach(x => (x.query = {
+                    ...x.query,
+
+                    plugins: [
+                        ...(x.query ? x.query.plugins : []),
+                        ['react-transform',
+                            {
+                                transforms: [
+                                    {
+                                        transform: 'react-transform-hmr',
+                                        imports: ['react'],
+                                        locals: ['module'],
+                                    }, {
+                                        transform: 'react-transform-catch-errors',
+                                        imports: ['react', 'redbox-react'],
+                                    },
+                                ],
+                            },
+                        ],
+                    ],
+                }));
         });
 
         const bundler = webpack(webpackConfig);
@@ -53,17 +78,24 @@ async function start() {
                 if (!err) {
                     const bs = browserSync.create();
                     bs.init({
+                        ...(DEBUG ? {} : { notify: false, ui: false }),
+
                         proxy: {
                             target: 'localhost:3000', // where the Hapi server is running
+                            // target: host,
                             middleware: [wpMiddleware, ...hotMiddlewares],
-                        }
+                        },
                     }, resolve);
                 }
+                handleServerBundleComplete = runServer;
             });
         };
 
         // Wait for server bundles to finish before serving
-        bundler.plugin('done', () => handleServerBundleComplete());
+        bundler.plugin('done', () => {
+            console.log('bundler done');
+            handleServerBundleComplete()
+        });
     });
 }
 

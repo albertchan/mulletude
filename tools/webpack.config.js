@@ -43,10 +43,9 @@ const config = {
                         'es2015',
                         'stage-0',
                     ],
-                    "plugins": [
+                    plugins: [
                         "transform-runtime",
                     ],
-                    "compact" : false,
                 },
             }, {
                 test: /\.json$/,
@@ -67,7 +66,7 @@ const config = {
     resolve: {
         root: path.resolve(__dirname, '../src'),
         modulesDirectories: ['node_modules'],
-        extensions: ['', '.webpack.js', '.web.js', '.js', '.jsx', '.json'],
+        extensions: ['', '.webpack.js', '.js', '.jsx', '.json'],
     },
 
     // for pretty colors in logs
@@ -83,8 +82,8 @@ const config = {
         cachedAssets: VERBOSE,
     },
 
-    // cache: DEBUG,
-    // debug: DEBUG,
+    cache: DEBUG,
+    debug: DEBUG,
 
     postcss(bundler) {
         // https://github.com/postcss/postcss-loader
@@ -139,7 +138,9 @@ const clientConfig = extend(true, {}, config, {
 
     target: 'web',
 
-    devtool: DEBUG ? 'source-map' : false,
+    // Choose a developer tool to enhance debugging
+    // http://webpack.github.io/docs/configuration.html#devtool
+    devtool: DEBUG ? 'cheap-module-eval-source-map' : false,
 });
 
 // Configuration for server bundle (server.js)
