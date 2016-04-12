@@ -68,11 +68,19 @@ npm install
 To bundle the assets for production or deployment:
 
 ```
-npm run build
+npm run build -- --release
 ```
 
 #### Todos
 
 * [ ] Testing
 * [ ] Provide example Redux actions
-* [ ] Internationalization (i18n)
+* [x] Internationalization (i18n)
+* [ ] Multi-site architecture
+* [ ] Migrate from `style-loader` to [`ExtractTextPlugin`](https://github.com/webpack/extract-text-webpack-plugin)
+
+#### References
+
+- [Getting Started with Redux (video tutorials)](https://egghead.io/series/getting-started-with-redux)
+- [Redux Documentation](http://redux.js.org/index.html)
+- [Understanding Webpack HMR](http://andrewhfarmer.com/understanding-hmr/)
