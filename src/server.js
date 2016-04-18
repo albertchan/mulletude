@@ -11,8 +11,6 @@ import handleRender from './helpers/render';
 
 // Check environment for production
 const environment = process.env.NODE_ENV || 'development';
-global.__DEVELOPMENT__ = environment === 'development';
-global.__PRODUCTION__ = environment === 'production';
 
 /**
  * Create and start Hapi server

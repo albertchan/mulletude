@@ -1,7 +1,6 @@
 @import '../../styles/variables';
-@import '../../styles/container';
 
-.root {
+.header {
   min-height: 64px;
   background-color: $brand-primary;
   color: $body-bg;
@@ -26,7 +25,7 @@
     text-transform: uppercase;
   }
 
-  .navbarRight {
+  .navbar-right {
     margin-left: auto;
     margin-right: $grid-gutter-width/2;
 

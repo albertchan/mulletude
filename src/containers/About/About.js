@@ -1,7 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 import Helmet from 'react-helmet';
-import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import s from './About.scss';
+// import s from './About.scss';
+
+// if ( process.env.BROWSER ) {
+//     require('./About.scss');
+// }
 
 class About extends Component {
     constructor(props) {
@@ -10,11 +13,11 @@ class About extends Component {
 
     render() {
         return (
-            <section className={s.root}>
+            <section className="about">
                 <Helmet title="About" />
-                <div className={s.container}>
-                    <p className={s.lead}>
-                        This project is made with <span className={s.red}>♥</span> by Albert Chan in old-time Hong Kong.
+                <div className="container">
+                    <p className="lead">
+                        This project is made with <span className="red">♥</span> by Albert Chan in old-time Hong Kong.
                     </p>
                 </div>
             </section>
@@ -22,5 +25,5 @@ class About extends Component {
     }
 }
 
-export default withStyles(About, s);
+export default About;
 

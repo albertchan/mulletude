@@ -1,7 +1,7 @@
 import extend from 'extend';
 import path from 'path';
 import webpack from 'webpack';
-import AssetsPlugin from 'assets-webpack-plugin';
+import ExtractTextPlugin from 'extract-text-webpack-plugin';
 
 // Configuration variables
 const DEBUG = !process.argv.includes('--release');
@@ -16,7 +16,15 @@ const AUTOPREFIXER_BROWSERS = [
     'Opera >= 12',
     'Safari >= 7.1',
 ];
+const GLOBALS = {
+    'process.env.NODE_ENV': DEBUG ? '"development"' : '"production"', // double quotes required
+    __DEVELOPMENT__: DEBUG,
+    __PRODUCTION__: !DEBUG,
+};
 
+// webpack-isomorphic-tools
+const WebpackIsomorphicToolsPlugin = require('webpack-isomorphic-tools/plugin');
+const webpackIsomorphicToolsPlugin = new WebpackIsomorphicToolsPlugin(require('./webpack.isomorphic.tools'));
 
 // Common configurations to be used for both client.js & server.js bundles
 // see https://webpack.github.io/docs/configuration.html
@@ -52,21 +60,55 @@ const config = {
                 loader: 'json-loader',
             }, {
                 test: /\.scss$/,
-                loaders: [
-                    // https://github.com/kriasoft/isomorphic-style-loader
-                    'isomorphic-style-loader',
-                    'css-loader?modules&localIdentName=[name]_[local]_[hash:base64:3]',
+                loaders: DEBUG ? [
+                    'style-loader',
+                    `css-loader?${JSON.stringify({
+                        // CSS Modules https://github.com/css-modules/css-modules
+                        modules: true,
+            
+                        importLoaders: 2,
+            
+                        // localIdentName: '[local]__[hash:base64:5]',
+                        localIdentName: '[local]',
+            
+                        sourceMap: DEBUG,
+                    })}`,
                     'postcss-loader?parser=postcss-scss',
-                    'sass?sourceMap'
+                    'sass-loader?outputStyle=expanded&sourceMap=true&sourceMapContents=true'
+                ] : [
+
                 ],
-            }
+            }, {
+                test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
+                loader: "url?limit=10000&mimetype=application/font-woff"
+            }, {
+                test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/,
+                loader: "url?limit=10000&mimetype=application/font-woff"
+            }, {
+                test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
+                loader: "url?limit=10000&mimetype=application/octet-stream"
+            }, {
+                test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
+                loader: "file"
+            }, {
+                test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
+                loader: "url?limit=10000&mimetype=image/svg+xml"
+            },
         ]
     },
+
+    plugins: [
+        ...(DEBUG ? [] : [
+            // css files from the extract-text-plugin loader
+            new ExtractTextPlugin('css/[name]-[chunkhash].css', { allChunks: true }),
+        ]),
+        DEBUG ? webpackIsomorphicToolsPlugin.development() : webpackIsomorphicToolsPlugin,
+    ],
 
     resolve: {
         root: path.resolve(__dirname, '../src'),
         modulesDirectories: ['node_modules'],
-        extensions: ['', '.webpack.js', '.js', '.jsx', '.json'],
+        extensions: ['', '.js', '.jsx', '.json'],
     },
 
     // for pretty colors in logs
@@ -88,7 +130,6 @@ const config = {
     postcss(bundler) {
         // https://github.com/postcss/postcss-loader
         return [
-            require('postcss-import')({ addDependencyTo: bundler }),
             require('autoprefixer')({ browsers: AUTOPREFIXER_BROWSERS }),
         ];
     },
@@ -115,13 +156,9 @@ const clientConfig = extend(true, {}, config, {
     },
 
     plugins: [
-        // Emit a file with assets paths
-        // https://github.com/sporto/assets-webpack-plugin#options
-        new AssetsPlugin({
-            path: path.resolve(__dirname, '../build'),
-            filename: 'assets.js',
-            processOutput: x => `module.exports = ${JSON.stringify(x)};`,
-        }),
+        // Define free variables
+        // https://webpack.github.io/docs/list-of-plugins.html#defineplugin
+        new webpack.DefinePlugin({ ...GLOBALS, 'process.env.BROWSER': true }),
 
         new webpack.optimize.OccurrenceOrderPlugin(true),
 
@@ -172,7 +209,11 @@ const serverConfig = extend(true, {}, config, {
 
     target: 'node',
 
-    plugins: [],
+    plugins: [
+        // Define free variables
+        // https://webpack.github.io/docs/list-of-plugins.html#defineplugin
+        new webpack.DefinePlugin({ ...GLOBALS, 'process.env.BROWSER': false }),
+    ],
 
     devtool: 'source-map',
 });

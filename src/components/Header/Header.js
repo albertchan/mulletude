@@ -1,17 +1,19 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router'
 import { translate } from 'react-i18next';
-import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import s from './Header.scss';
+
+if ( process.env.BROWSER ) {
+    require('./Header.scss');
+}
 
 function Header(props) {
     const { t } = props;
 
     return (
-        <div className={s.root}>
-            <div className={s.container}>
-                <Link to="/"><h1 className={s.logo} title="Mulletude">Mulletude</h1></Link>
-                <nav className={s.navbarRight}>
+        <div className="header">
+            <div className="container">
+                <Link to="/"><h1 className="logo" title="Mulletude">Mulletude</h1></Link>
+                <nav className="navbar-right">
                     <Link to="/about">{ t('nav.about') }</Link>
                 </nav>
             </div>
@@ -20,4 +22,4 @@ function Header(props) {
 }
 
 
-export default translate(['common'])(withStyles(Header, s));
+export default translate(['common'])(Header);

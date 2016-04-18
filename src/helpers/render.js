@@ -14,6 +14,12 @@ export default function(request, reply) {
     const i18nClient = { locale, resources };
     const i18nServer = i18n.cloneInstance();
 
+    if (__DEVELOPMENT__) {
+        // Do not cache webpack stats: the script file would change since
+        // hot module replacement is enabled in the development env
+        webpackIsomorphicTools.refresh();
+    }
+
     match({ routes, location: { pathname: request.path } }, (error, redirectLocation, renderProps) => {
         if (redirectLocation) {
             reply.redirect(redirectLocation.pathname + redirectLocation.search).code(301);
@@ -21,10 +27,7 @@ export default function(request, reply) {
             reply(error.message).code(500);
         } else if (renderProps) {
             loadNamespaces({ ...renderProps, i18n: i18nServer }).then(() => {
-                const css = [];
-                const context = {
-                    insertCss: styles => css.push(styles._getCss()),
-                };
+                const context = {};
 
                 // Compile an initial state
                 const initialState = {
@@ -43,14 +46,8 @@ export default function(request, reply) {
                     </I18nextProvider>
                 );
 
-                // const component = (
-                //     <Provider store={ store }>
-                //         <RouterContext { ...renderProps } />
-                //     </Provider>
-                // );
-
                 const output = renderToString(
-                    <Html component={ component } i18n={ i18nClient } store={ store } styles={ css } />
+                    <Html assets={ webpackIsomorphicTools.assets() } component={ component } i18n={ i18nClient } store={ store } />
                 );
 
                 // Send the rendered page back to the client

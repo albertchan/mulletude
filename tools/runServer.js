@@ -7,7 +7,9 @@ import webpackConfig from './webpack.config';
 const RUNNING_REGEXP = /Hapi server started at/g;
 
 const { output } = webpackConfig.find(x => x.target === 'node');
-const serverPath = path.join(output.path, output.filename);
+const outputPath = path.resolve(__dirname, '../tools');
+// const serverPath = path.join(output.path, output.filename);
+const serverPath = path.join(outputPath, './server.js');
 const format = '[yyyy-mm-dd HH:MM:ss]';
 let server;
 

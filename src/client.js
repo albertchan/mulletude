@@ -1,4 +1,3 @@
-// import 'babel-polyfill';
 import React from "react";
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
@@ -8,9 +7,8 @@ import i18n from './helpers/i18n-client';
 import configureStore from './store/configureStore';
 import routes from './routes';
 
-// const initialState = window.__INITIAL_STATE__ || {};
 const context = {
-    insertCss: styles => styles._insertCss(),
+
 };
 
 // translation bundle

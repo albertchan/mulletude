@@ -36,6 +36,7 @@ Mulletude, as the name implies, has attitude and is very opinionated. The opinio
 │   ├── containers/         # Higher-order React components
 │   ├── helpers/            # Helpers and handlers
 │   ├── locales/            # Translation files
+│   ├── middleware/         # Redux middleware
 │   ├── reducers/           # Redux reducers
 │   ├── routes/             # Page components along with routing information
 │   ├── store/              # Application state and logic
@@ -76,7 +77,7 @@ npm run build -- --release
 * [ ] Testing
 * [ ] Provide example Redux actions
 * [x] Internationalization (i18n)
-* [ ] Multi-site architecture
+* [ ] Implement [webpack-isomorphic-tools](https://github.com/halt-hammerzeit/webpack-isomorphic-tools/)
 * [ ] Migrate from `style-loader` to [`ExtractTextPlugin`](https://github.com/webpack/extract-text-webpack-plugin)
 
 #### References

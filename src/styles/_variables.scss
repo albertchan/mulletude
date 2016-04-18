@@ -1,3 +1,12 @@
+/**
+ *  Define scss variables here.
+ *
+ *  Available options for Bootstrap:
+ *  http://getbootstrap.com/customize/
+ *
+ */
+
+
 // Colors
 
 $gray-base:                 #000 !default;
@@ -24,7 +33,7 @@ $link-hover-color:          darken($link-color, 15%) !default;
 
 // Typography
 
-$font-family-sans-serif:    'Roboto', 'Helvetica Neue', sans-serif;
+$font-family-sans-serif:    'Helvetica Neue', Helvetica, sans-serif;
 $font-size-base:            16px;
 $line-height-base:          1.428571429 !default;
 $headings-color:            inherit !default;

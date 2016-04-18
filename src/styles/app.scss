@@ -1,10 +1,2 @@
-// Resets, mixins and variables
-@import "normalize";
-@import "variables";
-@import "mixins";
-
-// Core styles
-@import "scaffolding";
-@import "typography";
-@import "grid";
-@import "utilities";
+@import '../../node_modules/bootstrap/dist/css/bootstrap.css';
+@import 'variables';

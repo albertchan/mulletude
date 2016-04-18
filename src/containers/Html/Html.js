@@ -17,13 +17,19 @@ export default class Html extends Component {
         component: PropTypes.node,
         i18n: PropTypes.object,
         store: PropTypes.object,
-        styles: PropTypes.array,
+        assets: PropTypes.object,
     };
 
     rawMarkup(markup) {
         return {
             __html: markup
         };
+    }
+
+    devStyles() {
+        return {
+            __html: require('../../components/Header/Header.scss')._style
+        }
     }
 
     serializedI18n(i18n) {
@@ -33,7 +39,7 @@ export default class Html extends Component {
     }
 
     render() {
-        const { component, i18n, store, styles } = this.props;
+        const { assets, component, i18n, store } = this.props;
         let componentHTML = '';
         let head          = '';
         let meta          = '';
@@ -57,7 +63,21 @@ export default class Html extends Component {
                     { script }
                     <meta name="viewport" content="width=device-width, initial-scale=1" />
                     <link type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:400,700,400italic,700italic,300italic,300,100italic,100,500,500italic' rel='stylesheet" />
-                    <style type="text/css">{ styles.join('') }</style>
+                    {/* styles (will be present only in production with webpack extract text plugin) */}
+                    {/* Object.keys(assets.styles).map((style, key) =>
+                        <link key={ key }
+                              href={ assets.styles[style] }
+                              media="screen, projection"
+                              rel="stylesheet"
+                              type="text/css"
+                              charSet="utf-8" />
+                    ) */}
+
+                    {/* (will be present only in development mode) */}
+                    {/* outputs a <style/> tag with all bootstrap styles + App.scss + it could be CurrentPage.scss. */}
+                    {/* can smoothen the initial style flash (flicker) on page load in development mode. */}
+                    {/* ideally one could also include here the style for the current page (Home.scss, About.scss, etc) */}
+                    {/* Object.keys(assets.styles).length === 0 ? <style dangerouslySetInnerHTML={ this.devStyles() } /> : null */}
                 </head>
                 <body>
                     <div id="app" dangerouslySetInnerHTML={ this.rawMarkup(componentHTML) } />
