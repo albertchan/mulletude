@@ -156,6 +156,8 @@ const clientConfig = extend(true, {}, config, {
     },
 
     plugins: [
+        ...config.plugins,
+
         // Define free variables
         // https://webpack.github.io/docs/list-of-plugins.html#defineplugin
         new webpack.DefinePlugin({ ...GLOBALS, 'process.env.BROWSER': true }),
@@ -210,6 +212,8 @@ const serverConfig = extend(true, {}, config, {
     target: 'node',
 
     plugins: [
+        ...config.plugins,
+
         // Define free variables
         // https://webpack.github.io/docs/list-of-plugins.html#defineplugin
         new webpack.DefinePlugin({ ...GLOBALS, 'process.env.BROWSER': false }),
