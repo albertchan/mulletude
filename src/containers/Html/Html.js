@@ -26,10 +26,15 @@ export default class Html extends Component {
         };
     }
 
-    devStyles() {
+    devStyles(styles) {
+        const App = styles['./containers/App/App.scss']._style;
+        const Header = styles['./components/Header/Header.scss']._style;
+        const Footer = styles['./components/Footer/Footer.scss']._style;
+        const Home = styles['./containers/Home/Home.scss']._style;
+
         return {
-            __html: require('../../components/Header/Header.scss')._style
-        }
+            __html: App + Header + Footer + Home
+        };
     }
 
     serializedI18n(i18n) {
@@ -63,21 +68,21 @@ export default class Html extends Component {
                     { script }
                     <meta name="viewport" content="width=device-width, initial-scale=1" />
                     <link type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:400,700,400italic,700italic,300italic,300,100italic,100,500,500italic' rel='stylesheet" />
-                    {/* styles (will be present only in production with webpack extract text plugin) */}
-                    {/* Object.keys(assets.styles).map((style, key) =>
+                    {/* (Present only in production with webpack extract text plugin) */}
+                    { Object.keys(assets.styles).map((style, key) =>
                         <link key={ key }
                               href={ assets.styles[style] }
                               media="screen, projection"
                               rel="stylesheet"
                               type="text/css"
                               charSet="utf-8" />
-                    ) */}
+                    ) }
 
-                    {/* (will be present only in development mode) */}
-                    {/* outputs a <style/> tag with all bootstrap styles + App.scss + it could be CurrentPage.scss. */}
+                    {/* (Present only in development mode) */}
+                    {/* Outputs a <style/> tag with all base styles + App.scss. */}
                     {/* can smoothen the initial style flash (flicker) on page load in development mode. */}
                     {/* ideally one could also include here the style for the current page (Home.scss, About.scss, etc) */}
-                    {/* Object.keys(assets.styles).length === 0 ? <style dangerouslySetInnerHTML={ this.devStyles() } /> : null */}
+                    { Object.keys(assets.styles).length === 0 ? <style dangerouslySetInnerHTML={ this.devStyles(assets.assets) } /> : null }
                 </head>
                 <body>
                     <div id="app" dangerouslySetInnerHTML={ this.rawMarkup(componentHTML) } />

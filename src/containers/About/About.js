@@ -1,10 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import Helmet from 'react-helmet';
-// import s from './About.scss';
 
-// if ( process.env.BROWSER ) {
-//     require('./About.scss');
-// }
+if ( process.env.BROWSER ) {
+    require('./About.scss');
+}
 
 class About extends Component {
     constructor(props) {
