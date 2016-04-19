@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { Link } from 'react-router'
+import { Link } from 'react-router';
 import { translate } from 'react-i18next';
 
 if ( process.env.BROWSER ) {

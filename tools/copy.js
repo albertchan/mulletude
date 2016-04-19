@@ -1,5 +1,6 @@
-import path from 'path';
+import fs from 'fs';
 import gaze from 'gaze';
+import path from 'path';
 import Promise from 'bluebird';
 
 /**
@@ -7,6 +8,13 @@ import Promise from 'bluebird';
  */
 async function copy({ watch } = {}) {
     const ncp = Promise.promisify(require('ncp'));
+
+    // create `build/` if not exist
+    try {
+        fs.statSync('build');
+    } catch (error) {
+        fs.mkdirSync('build');
+    }
 
     await Promise.all([
         ncp('src/public', 'build/public'),

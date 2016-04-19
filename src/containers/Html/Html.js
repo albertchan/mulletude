@@ -14,17 +14,11 @@ import serialize from 'serialize-javascript';
  */
 export default class Html extends Component {
     static propTypes = {
+        assets: PropTypes.object,
         component: PropTypes.node,
         i18n: PropTypes.object,
         store: PropTypes.object,
-        assets: PropTypes.object,
     };
-
-    rawMarkup(markup) {
-        return {
-            __html: markup
-        };
-    }
 
     devStyles(styles) {
         const App = styles['./containers/App/App.scss']._style;
@@ -34,6 +28,12 @@ export default class Html extends Component {
 
         return {
             __html: App + Header + Footer + Home
+        };
+    }
+
+    rawMarkup(markup) {
+        return {
+            __html: markup
         };
     }
 

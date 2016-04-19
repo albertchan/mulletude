@@ -30,9 +30,7 @@ export default function(request, reply) {
                 const context = {};
 
                 // Compile an initial state
-                const initialState = {
-                    context: context,
-                };
+                const initialState = { context };
 
                 // Create a new Redux store instance
                 const store = configureStore(initialState);
@@ -47,7 +45,10 @@ export default function(request, reply) {
                 );
 
                 const output = renderToString(
-                    <Html assets={ webpackIsomorphicTools.assets() } component={ component } i18n={ i18nClient } store={ store } />
+                    <Html assets={ webpackIsomorphicTools.assets() }
+                          component={ component }
+                          i18n={ i18nClient }
+                          store={ store } />
                 );
 
                 // Send the rendered page back to the client

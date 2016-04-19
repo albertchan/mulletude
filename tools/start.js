@@ -52,25 +52,6 @@ async function start() {
                         ],
                     ],
                 }));
-
-                // config.module.loaders.push({
-                //     test: /\.scss$/,
-                //     loaders: DEBUG ? [
-                //         'style-loader',
-                //         `css-loader?${JSON.stringify({
-                //             // CSS Modules https://github.com/css-modules/css-modules
-                //             modules: true,
-                //
-                //             importLoaders: 2,
-                //
-                //             localIdentName: '[local]__[hash:base64:5]',
-                //
-                //             sourceMap: DEBUG,
-                //         })}`,
-                //         'postcss-loader?parser=postcss-scss',
-                //         'sass-loader?outputStyle=expanded&sourceMap=true&sourceMapContents=true'
-                //     ] : []
-                // });
         });
 
         const bundler = webpack(webpackConfig);
